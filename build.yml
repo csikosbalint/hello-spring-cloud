@@ -1,11 +1,13 @@
-platform: linux
+---
+resources:
+- name: hello-source
+  type: git
+  source:
+    uri: https://github.com/csikosbalint/hello-spring-cloud
 
-image_resource:
-  type: docker-image
-  source: {repository: busybox}
-
-inputs:
-- name: hello-spring-cloud
-
-run:
-  path: ls -la .
+jobs:
+- name: hello
+  plan:
+  - get: hello-source
+  - task: annoy
+    file: build.yml
